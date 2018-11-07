@@ -13,7 +13,8 @@ explained below.
 
 - `app`: An instance of a LoopBack application.
 - `path`: The path where the static assets are to be served from. Refer to
-  https://expressjs.com/en/4x/api.html#path-examples for possible values.
+  [path examples](https://expressjs.com/en/4x/api.html#path-examples) in the
+  Express docs for possible values.
 - `rootDir`: The directory where the static assets are located on the file
   system.
 - `options`: An otional object for configuring the underlying
@@ -22,20 +23,19 @@ explained below.
 Here is an example of configuring an app to serve the static assets from a
 directory named `public` at `/`.
 
+{% include code-caption.html content="src/application.ts" %}
+
 ```ts
-import {TodoListApplication} from './application';
-import {ApplicationConfig} from '@loopback/core';
-const path = require('path');
+export class TodoListApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    super(options);
 
-export async function main(options?: ApplicationConfig) {
-  const app = new TodoListApplication(options);
-  app.static('/', path.join(__dirname, 'public'));
-  await app.boot();
-  await app.start();
+    // ...
 
-  const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  return app;
+    this.static('/', path.join(__dirname, '../../public'));
+  }
 }
 ```
 
