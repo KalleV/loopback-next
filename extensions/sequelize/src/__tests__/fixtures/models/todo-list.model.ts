@@ -17,7 +17,7 @@ export class TodoList extends Entity {
   title: string;
 
   @hasMany(() => Todo, {
-    // keyTo: 'todoListId',
+    keyTo: 'todoListId',
   })
   todos: Todo[];
 

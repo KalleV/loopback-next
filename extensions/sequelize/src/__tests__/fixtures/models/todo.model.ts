@@ -22,7 +22,7 @@ export class Todo extends Entity {
   })
   isComplete?: boolean;
 
-  @belongsTo(() => TodoList, {name: 'todoList'} /* {name: 'todo_list_id'} */)
+  @belongsTo(() => TodoList, {name: 'todoList'}, {name: 'todo_list_id'})
   todoListId: number;
 
   constructor(data?: Partial<Todo>) {
